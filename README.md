@@ -32,7 +32,6 @@ Content-Length: 109
 {"url":"http://yourbucket.s3-website-sa-east-1.amazonaws.com/faef6e44-05ef-416c-a392-a8b388e4258b_test.png"}
 
 
-
 curl http://127.0.0.1:8080/
 > GET / HTTP/1.1
 > User-Agent: curl/7.35.0
