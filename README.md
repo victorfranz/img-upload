@@ -1,4 +1,4 @@
-# img-upload
+# img-upload [![Build Status](https://travis-ci.org/victorfranz/img-upload.svg?branch=master)](https://travis-ci.org/victorfranz/img-upload)
 
 A simple Spray service to upload images to S3 bucket
 
