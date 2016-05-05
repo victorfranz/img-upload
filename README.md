@@ -1,4 +1,4 @@
-# img-upload [![Build Status](https://travis-ci.org/victorfranz/img-upload.svg?branch=master)](https://travis-ci.org/victorfranz/img-upload) [![Codecov](https://img.shields.io/codecov/c/github/victorfranz/img-upload.svg?maxAge=2592000)]()
+# img-upload [![Build Status](https://travis-ci.org/victorfranz/img-upload.svg?branch=master)](https://travis-ci.org/victorfranz/img-upload) [![Codecov](https://img.shields.io/codecov/c/github/victorfranz/img-upload.svg?maxAge=2592000)](https://codecov.io/gh/victorfranz/img-upload) [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/victorfranz/img-upload/master/LICENSE)
 
 A simple Spray service to upload images to S3 bucket
 
