@@ -36,18 +36,8 @@ libraryDependencies ++= {
     "com.typesafe.akka"   %%  "akka-testkit"  % akkaV   % "test",
     "com.typesafe"          % "config" % "1.2.1",
     "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0",
-    "com.googlecode.concurrentlinkedhashmap"  % "concurrentlinkedhashmap-lru"   % "1.4.2",
     "ch.qos.logback"        %  "logback-classic"   % "1.1.2",
     "org.json4s"          %% "json4s-jackson" % "3.2.11",
-    "com.sksamuel.elastic4s"        %% "elastic4s"              % "1.5.5",
-    "com.fasterxml.jackson.core"    %  "jackson-core"           %"2.4.1",
-    "com.fasterxml.jackson.core"    %  "jackson-databind"       %"2.4.1",
-    "com.fasterxml.jackson.module"  %% "jackson-module-scala"   % "2.4.1",
-    "com.fasterxml.uuid"  % "java-uuid-generator"   % "3.1.3",
-    "com.github.t3hnar" %% "scala-bcrypt" % "2.4",
-    "org.json4s" %% "json4s-native" % "3.2.11",
-    "org.json4s" %% "json4s-ext" % "3.2.11",
-    "com.github.nscala-time" %% "nscala-time" % "1.8.0",
     "org.codehaus.groovy"            %  "groovy"                      % "2.3.7"  % "test",
     "org.specs2"          %%  "specs2-core"   % specs2V % "test",
     "org.specs2" %% "specs2-mock" % specs2V % "test",
@@ -61,8 +51,6 @@ libraryDependencies ++= {
 Revolver.settings
 
 Revolver.enableDebugging(port = 5050, suspend = true)
-
-tomcat()
 
 lazy val root = (project in file(".")).
   enablePlugins(BuildInfoPlugin).

@@ -19,6 +19,7 @@ import spray.http.HttpHeaders
 import spray.http.MediaTypes
 import spray.http.MultipartFormData
 import spray.http.StatusCodes.OK
+import spray.http.StatusCodes.BadRequest
 import spray.routing.HttpService
 import spray.testkit.Specs2RouteTest
 import org.specs2.runner.JUnitRunner
@@ -29,37 +30,62 @@ class ApiRouterSpec extends Specification with Specs2RouteTest with Mockito with
   val spec = this
   val contentTypeHeader = "Content-Type"
   val contentTypeHeaderValue = "application/json"
+  val oneMB = 1048576
+  
   implicit def default(implicit system: ActorSystem) = RouteTestTimeout(30.second dilated)
 
   "ApiRouter" should {
     "upload an image" >> {
-      "post" in {
 
-        val img = new File(getClass.getResource("/test.png").getPath)
-        val payload = MultipartFormData(Seq(BodyPart(img, "data", MediaTypes.`image/png`)))
+      val img = new File(getClass.getResource("/test.png").getPath)
+      val payload = MultipartFormData(Seq(BodyPart(img, "data", MediaTypes.`image/png`)))
 
-        val service = createRoute()
-        Post("/", payload) ~>
-          addHeader(HttpHeaders.`Content-Length`(333)) ~>
-          sealRoute(service) ~> check {
+      val service = createRoute()
+      Post("/", payload) ~>
+        addHeader(HttpHeaders.`Content-Length`(333)) ~>
+        sealRoute(service) ~> check {
 
-            val response = responseAs[String]
-            response should contain("url", "test.png")
+          val response = responseAs[String]
+          response should contain("url", "test.png")
 
-            status === OK
-          }
-      }
+          status === OK
+        }
+    }
+    "accept files up to 2M" >> {
+      val img = new File(getClass.getResource("/test.png").getPath)
+      val payload = MultipartFormData(Seq(BodyPart(img, "data", MediaTypes.`image/png`)))
+      
+      val service = createRoute()
+
+      Post("/", payload) ~>
+        addHeader(HttpHeaders.`Content-Length`(oneMB * 2)) ~>
+        sealRoute(service) ~> check {
+
+          val response = responseAs[String]
+          response should contain("url", "test.png")
+
+          status === OK
+        }
+    }
+    "reject files greater then 2M" >> {
+
+      val img = new File(getClass.getResource("/test.png").getPath)
+      val payload = MultipartFormData(Seq(BodyPart(img, "data", MediaTypes.`image/png`)))
+      val service = createRoute()
+      Post("/", payload) ~>
+        addHeader(HttpHeaders.`Content-Length`(oneMB * 3)) ~>
+        sealRoute(service) ~> check {
+          status === BadRequest
+        }
     }
     "return build info" >> {
-      "get" in {
 
-        val service = createRoute()
-        Get("/") ~> sealRoute(service) ~> check {
-          val response = responseAs[String]
-          response should contain("builtAtMillis", """"name":"img-upload"""", "scalaVersion", """"version":"0.1"""", "builtAtString")
-          status === OK
+      val service = createRoute()
+      Get("/") ~> sealRoute(service) ~> check {
+        val response = responseAs[String]
+        response should contain("builtAtMillis", """"name":"img-upload"""", "scalaVersion", """"version":"0.1"""", "builtAtString")
+        status === OK
 
-        }
       }
     }
   }
