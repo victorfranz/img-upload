@@ -99,9 +99,10 @@ trait ApiService extends HttpService with Directives with DefaultJsonFormats {
       }
     }
   }
-
+  // $COVERAGE-OFF$
   def saveAttachment(fileName: String, content: ByteArrayInputStream) = Try(
     amazonS3Client.putObject(bucketName, fileName, content, null))
+  // $COVERAGE-ON$
 }
 
 

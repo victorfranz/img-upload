@@ -61,3 +61,4 @@ lazy val root = (project in file(".")).
     buildInfoOptions += BuildInfoOption.ToJson
   )
   
+ScoverageSbtPlugin.ScoverageKeys.coverageExcludedPackages := """.*\.imgupload\.Boot;.*\.ApiRouter"""
