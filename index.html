@@ -50,13 +50,22 @@ imgupload {
 <p>Example of usage:</p>
 
 <blockquote>
-<p>curl -i -F "data=@test.png" <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a></p>
+<p>curl -i -F "data=@test.png" http://127.0.0.1:8080/</p>
 
 <pre>
+< HTTP/1.1 200 OK
+HTTP/1.1 200 OK
+< Date: Thu, 28 Apr 2016 03:19:42 GMT
+Date: Thu, 28 Apr 2016 03:19:42 GMT
+< Content-Type: application/json; charset=UTF-8
+Content-Type: application/json; charset=UTF-8
+< Content-Length: 109
+Content-Length: 109
+ Connection #0 to host 127.0.0.1 left intact
+{"url":"http://yourbucket.s3-website-sa-east-1.amazonaws.com/faef6e44-05ef-416c-a392-a8b388e4258b_test.png"}
+</pre>
 
-
-<p>curl <a href="http://127.0.0.1:8080/">http://127.0.0.1:8080/</a></p>
-
+<p>curl http://127.0.0.1:8080/</p>
 <pre>
 GET / HTTP/1.1
 User-Agent: curl/7.35.0
@@ -64,9 +73,16 @@ Host: 127.0.0.1:8080
 Accept: */*
 Referer: rbose
 
-
-</pre></pre>
+< HTTP/1.1 200 OK
+< Date: Thu, 28 Apr 2016 03:18:54 GMT
+< Content-Type: application/json; charset=UTF-8
+< Content-Length: 162
+< 
+* Connection #0 to host 127.0.0.1 left intact
+{"builtAtMillis":"1461813488487", "name":"img-upload", "scalaVersion":"2.11.2", "version":"0.1", "sbtVersion":"0.13.6", "builtAtString":"2016-04-28 03:18:08.487"}
+</pre>
 </blockquote>
+
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/victorfranz/img-upload">Img-upload</a> is maintained by <a href="https://github.com/victorfranz">victorfranz</a>.</span>
